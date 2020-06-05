@@ -264,11 +264,11 @@ The completed ARM template should look as follows:
 ```
 
 ## Deploy ARM template via Portal
-1. Open the Azure Portal as +++@lab.CloudPortalCredential(1).Username+++ using +++@lab.CloudPortalCredential(1).Password+++ as the password.
+1. Open the Azure Portal as the user listed in your resources tab of your lab guide/
 1. (+) Create a resource -> search for "Template Deployment" - Create
 1. Click "Build your own template in the editor"
 1. Copy and paste the contents of the newly created `DeploymentMethods.template.json` file
-1. Select your existing resource group `@lab.CloudResourceGroup(1849).Name`
+1. Select your existing resource group
 1. Enter a value for `environment`
 1. Set the value of `projectName` to `DeploymentMethod1`
 1. Agree to the terms and conditions and click Purchase
@@ -302,24 +302,24 @@ The completed ARM template should look as follows:
 
 ### Deploy with PowerShell
 1. Open PowerShell in `C:\Lab_Files\M04\S03-Lab1`
-1. Authenticate PowerShell to Azure by running `Connect-AzAccount` as +++@lab.CloudPortalCredential(1).Username+++ using +++@lab.CloudPortalCredential(1).Password+++ as the password.
+1. Authenticate PowerShell to Azure by running `Connect-AzAccount` as the user listed in the resources tab of your lab guide.
 
    ```PowerShell
-   Set-AzContext -Subscription '@lab.CloudSubscription.Id'
-   New-AzResourceGroupDeployment -Name 'DeploymentMethod2' -ResourceGroupName '@lab.CloudResourceGroup(1849).Name'  -TemplateFile '.\DeploymentMethods.template.json' -TemplateParameterFile  '.\DeploymentMethod2.parameters.json' -Mode Incremental
+   Set-AzContext -Subscription 'ID_FOUND_IN_RESOURCES'
+   New-AzResourceGroupDeployment -Name 'DeploymentMethod2' -ResourceGroupName 'RG_FOUND_IN_RESOURCES'  -TemplateFile '.\DeploymentMethods.template.json' -TemplateParameterFile  '.\DeploymentMethod2.parameters.json' -Mode Incremental
    ```
 
 1. Open to the Azure Portal [https://portal.azure.com](https://portal.azure.com)
-1. Navigate to the resource group `@lab.CloudResourceGroup(1849).Name` to see the newly created resources
+1. Navigate to the resource group to see the newly created resources
 
 ## Deploy template file via PowerShell with parameters in-line
 1. Run the following PowerShell commands to deploy the template with parameters in-line
    ```PowerShell
-   New-AzResourceGroupDeployment -Name 'DeploymentMethod3' -ResourceGroupName '@lab.CloudResourceGroup(1849).Name' -TemplateFile '.\DeploymentMethods.template.json' -Mode Incremental -environment 'YOUR_VALUE_HERE' -projectName 'DeploymentMethod3'
+   New-AzResourceGroupDeployment -Name 'DeploymentMethod3' -ResourceGroupName 'RG_FOUND_IN_RESOURCES' -TemplateFile '.\DeploymentMethods.template.json' -Mode Incremental -environment 'YOUR_VALUE_HERE' -projectName 'DeploymentMethod3'
    ```
 
 1. Open to the Azure Portal [https://portal.azure.com](https://portal.azure.com)
-1. Navigate to the resource group `@lab.CloudResourceGroup(1849).Name` to see the newly created resources
+1. Navigate to the resource group to see the newly created resources
 
 ## Deploy template & parameters from URI via PowerShell
 ### Create DeploymentMethod4.parameters.json
@@ -329,7 +329,7 @@ The completed ARM template should look as follows:
 ### Upload files to blob storage
 In order to deploy the template & parameters from URI, they first must be made available at a public accessible URL. We will use the blob container child resource created with Azure Storage account from the last deployment to host these files.
 1. Open to the Azure Portal [https://portal.azure.com](https://portal.azure.com)
-1. Navigate to the resource group `@lab.CloudResourceGroup(1849).Name
+1. Navigate to the resource group
 1. Open the storage account
 1. Click Storage Explorer
 1. Expand Blob Containers and select templates
@@ -340,7 +340,7 @@ In order to deploy the template & parameters from URI, they first must be made a
 
 ### Deploy with PowerShell
 ```PowerShell
-New-AzResourceGroupDeployment -Name 'DeploymentMethod4' -ResourceGroupName '@lab.CloudResourceGroup(1849).Name' -TemplateUri "DeploymentMethods.template.json_URL_HERE" -TemplateParameterUri "DeploymentMethod4.parameters.json_URL_HERE" -Mode Incremental
+New-AzResourceGroupDeployment -Name 'DeploymentMethod4' -ResourceGroupName 'RG_FOUND_IN_RESOURCES' -TemplateUri "DeploymentMethods.template.json_URL_HERE" -TemplateParameterUri "DeploymentMethod4.parameters.json_URL_HERE" -Mode Incremental
 ```
 
 # Lab 2 - ARM Templates - Common Deployment Methods & Deployment Order - Linked / Nested Templates
@@ -540,7 +540,7 @@ The completed ARM template should look as follows:
 1. Deploy DeploymentMethods.LinkedNested.template.json with a method of your choice.
    1. `"projectName"` should have a value of `"DeploymentMethod5"`
 1. Open to the Azure Portal [https://portal.azure.com](https://portal.azure.com)
-1. Navigate to the resource group `@lab.CloudResourceGroup(1849).Name` to see the newly created resources
+1. Navigate to the resource group to see the newly created resources
 1. Click "Deployments" under the "Settings" section
 1. Review the three deployments created by this deployment operation:
    1. Master deployment used for deploying DeploymentMethods.LinkedNested.template.json
