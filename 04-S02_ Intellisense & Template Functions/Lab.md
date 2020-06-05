@@ -34,20 +34,18 @@
      ![ARM environment parameter](media/ARMTemplate.EnvironmentParameter.png)
 
 1. Add four additional parameters with a description of your choice. (**NOTE:** you will need to add a `,` after the closing `}` for each parameter block except the final parameter)
-   1. `"projectName"`
-   1. `"vNetAddressRange"`
-   1. `"subnet1AddressRange"`
-   1. `"subnet2AddressRange"`
+   1. `"projectName"` -Description "Project Name"
+   1. `"vNetAddressRange"` -Description "Virtual Network address range in CIDR notation"
+   1. `"subnet1AddressRange"` -Description "Subnet 1 address range in CIDR notation"
+   1. `"subnet2AddressRange"` -Description "Subnet 2 address range in CIDR notation"
 
-     !IMAGE[ARMTemplate.AllParametersCompleted.png](ARMTemplate.AllParametersCompleted.png)
+     ![ARM all params completed](media/ARMTemplate.AllParametersCompleted.png)
 
 ## Add variables to the ARM template
 1. Move your cursor in between the `{}` brackets on the line containing `"variables": {},` and press `Enter` to create a new line
 1. Type `arm-variable` and press `Enter` to insert a new variable snippet
 
      ![ARM variable](media/ARMTemplate.Variable.png)
-
-     ![ARM variable completed](media/ARMTemplate.VariableCompleted.png)
 
 1. Change `"variable1"` to `"vNetName"`
 1. Change `"value"` to `"[concat(parameters('projectName'), '-', parameters('environment'), '-VNet')]"`
@@ -57,7 +55,7 @@
    1. Pick the `concat` function
    1. Now add the `parameters` function and notice how IntelliSense populates a list of available parameters
    1. Continue using IntelliSense to complete the variable value
-1. Add another variable named `"subnetNamePrefix"` with a value of `"[concat(parameters('projectName'), parameters('environment'), '-Subnet-')]"`
+1. Add a comma at the end of the line containing the vNetName variable, and then add another variable named `"subnetNamePrefix"` with a value of `"[concat(parameters('projectName'), parameters('environment'), '-Subnet-')]"`
 
      ![ARM variables completed](media/ARMTemplate.AllVariablesCompleted.png)
 
@@ -68,7 +66,7 @@
 1. Change the value of `"addressPrefixes"` under the `"addressSpace"` property from `"10.0.0.0/16"` to `"[parameters('vNetAddressRange')]"`
 1. Change the value of `"name"` for the first subnet object from `"Subnet-1"` to `"[concat(variables('subnetNamePrefix'), '1')]"`
 1. Change the value of `"addressPrefix"` for the first subnet object from `"10.0.0.0/24"` to `"[parameters('subnet1AddressRange')]"`
-1. Update the second subnet object accordingly
+1. Update the second subnet object accordingly, changing the address prefix from 10.0.1.0/24 to `"[parameters('subnet2AddressRange')]"`
 1. Once complete, save the file
 
      ![ARM resource completed](media/ARMTemplate.ResourceCompleted.png)
@@ -87,7 +85,7 @@
 
      ![ARM environment parameter value](media/ARMParameters.EnvironmentParameter.png)
 
-1. Add the remaining parameters with the following values
+1. Add the remaining parameters with the following values. Ensure you have commas at the end of each parameter block with the exception of the last one!
    1. `"projectName"` = `"M04Lesson2"`
    1. `"vNetAddressRange"` = `"10.0.0.0/16"`
    1. `"subnet1AddressRange"` = `"10.0.0.0/24"`
@@ -102,8 +100,8 @@
 1. Run the following PowerShell commands to deploy the template
 
 ```PowerShell
-Set-AzContext -Subscription '@lab.CloudSubscription.Id'
-New-AzResourceGroupDeployment -Name 'M04Lesson2' -ResourceGroupName '@lab.CloudResourceGroup(1848).Name' -TemplateFile '.\M04Lesson2.template.json' -TemplateParameterFile '.\M04Lesson2.parameters.json' -Mode Incremental
+Set-AzContext -Subscription 'YOUR_SUBSCRIPTION_ID(FOUND IN RESOURCES TAB OF LAB GUIDE)'
+New-AzResourceGroupDeployment -Name 'M04Lesson2' -ResourceGroupName 'RG_NAME_FOUND_IN_RESOURCES_TAB' -TemplateFile '.\M04Lesson2.template.json' -TemplateParameterFile '.\M04Lesson2.parameters.json' -Mode Incremental
 ```
 
 ## Inspect the deployed Virtual Network
