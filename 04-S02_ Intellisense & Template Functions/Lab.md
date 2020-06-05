@@ -101,8 +101,8 @@ New-AzResourceGroupDeployment -Name 'M04Lesson2' -ResourceGroupName 'RG_NAME_FOU
 ```
 
 ## Inspect the deployed Virtual Network
-1. Open the Azure Portal as +++@lab.CloudPortalCredential(1).Username+++ using +++@lab.CloudPortalCredential(1).Password+++ as the password.
-1. Navigate to the resource group `@lab.CloudResourceGroup(1848).Name`
+1. Open the Azure Portal (portal.azure.com) in a web browser, and authenticate with the credentials provided in the resource tab of your lab guide.
+1. Navigate to the resource group listed in your Resources tab of your lab guide.
 1. Open the `M04Lesson2-Dev-VNet` virtual network
 1. Notice the virtual network name and tag changed from `"[concat(parameters('projectName'), '-', parameters('environment'), '-VNet')]"` to `M04Lesson2-Dev-VNet`
 1. Review the other virtual network properties and see how the template functions changed after deployment
