@@ -92,7 +92,7 @@
 
 ## Deploy the ARM template file with the parameters file
 1. Open PowerShell in `C:\Lab_Files\M04\S02` (**NOTE:** Visual Studio Code has a built-in PowerShell terminal that can be used in place of a standalone terminal.)
-1. Authenticate PowerShell to Azure by running `Connect-AzAccount` as +++@lab.CloudPortalCredential(1).Username+++ using +++@lab.CloudPortalCredential(1).Password+++ as the password. (**NOTE:** If using Visual Studio Code's built-in terminal, the authentication window may be hidden behind the Visual Studio Code window.)
+1. Authenticate PowerShell to Azure by running `Connect-AzAccount` (**NOTE:** If using Visual Studio Code's built-in terminal, the authentication window may be hidden behind the Visual Studio Code window.)
 1. Run the following PowerShell commands to deploy the template
 
 ```PowerShell
