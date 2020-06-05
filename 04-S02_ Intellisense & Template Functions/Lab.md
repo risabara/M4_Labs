@@ -26,8 +26,6 @@
 
      ![ARM parameter](media/ARMTemplate.Parameter.png)
 
-     ![ARM parameter completed](media/ARMTemplate.ParameterCompleted.png)
-
 1. Change `"parameter1"` to `"environment"`
 1. Set the `"description"` value to `"Environment (Dev/QA/Prod)"`
 
