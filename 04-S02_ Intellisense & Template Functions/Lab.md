@@ -24,10 +24,6 @@
 1. Move your cursor in between the `{}` brackets on the line containing `"parameters": {},` and press `Enter` to create a new line
 1. Type `arm-param` and press `Enter` to insert a new parameter snippet. (**NOTE:** Depending on the version of the snippet extension, the snippet may be referenced by another name such as `arm-parameter`)
 
-     ![ARM parameter](media/ARMTemplate.Parameter.png)
-
-     ![ARM parameter completed](media/ARMTemplate.ParameterCompleted.png)
-
 1. Change `"parameter1"` to `"environment"`
 1. Set the `"description"` value to `"Environment (Dev/QA/Prod)"`
 
