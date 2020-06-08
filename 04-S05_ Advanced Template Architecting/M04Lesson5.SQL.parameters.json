@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sqlAdminUsername": {
+            "value": "sqladmin"
+        },
+        "vnetName": {
+            "value": "VNet-M04Lesson05-Dev"
+        },
+        "subnetName": {
+            "value": "Subnet-App"
+        },
+        "sqlAdminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/6130a281-8369-4edf-ac06-90a7db3cdcb8/resourceGroups/iac-lod12527955/providers/Microsoft.KeyVault/vaults/muxeiukkypzdq"
+                },
+                "secretName": "SQLAdminPassword"
+            }
+        }
+    }
+}
