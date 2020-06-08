@@ -256,15 +256,15 @@ The completed VNet ARM template should look as follows:
 
 ### Deploy VNet with PowerShell
 1. Open PowerShell in `C:\Lab_Files\M04\S05`
-1. Authenticate PowerShell to Azure by running `Connect-AzAccount` as +++@lab.CloudPortalCredential(1).Username+++ using +++@lab.CloudPortalCredential(1).Password+++ as the password.
+1. Authenticate PowerShell to Azure by running az login, and then set-azcontext -subscriptionid “xx-xx-xx-xx”
 1. Run the following PowerShell commands to deploy the template
 
 ```PowerShell
-New-AzResourceGroupDeployment -Name 'M04Lesson5-VNet' -ResourceGroupName '@lab.CloudResourceGroup(1851).Name'  -TemplateFile '.\M04Lesson5.VNet.template.json' -TemplateParameterFile  '.\M04Lesson5.VNet.parameters.json' -Mode Incremental
+New-AzResourceGroupDeployment -Name 'M04Lesson5-VNet' -ResourceGroupName 'RG_NAME_LISTED_IN_RESOURCES'  -TemplateFile '.\M04Lesson5.VNet.template.json' -TemplateParameterFile  '.\M04Lesson5.VNet.parameters.json' -Mode Incremental
 ```
 
-1. Open the Azure Portal as +++@lab.CloudPortalCredential(1).Username+++ using +++@lab.CloudPortalCredential(1).Password+++ as the password.
-1. Navigate to the resource group `@lab.CloudResourceGroup(1851).Name` to see the newly created resources
+1. Open the Azure Portal using the provided credentials
+1. Navigate to the resource group listed in your lab guide to see the newly created resources
 
 ## Create Key Vault ARM template
 For the next step, we will be using a Key Vault to secure a SQL admin password used during deployment.
@@ -374,7 +374,7 @@ The completed Key Vault ARM template should look as follows:
 ```PowerShell
 New-AzResourceGroupDeployment `
     -Name 'M04Lesson5-KeyVault' `
-    -ResourceGroupName @lab.CloudResourceGroup(1851).Name  `
+    -ResourceGroupName RG_NAME_IN_LAB_GUIDE  `
     -TemplateFile '.\M04Lesson5.KeyVault.template.json' `
     -Mode Incremental `
     -userObjectId (Get-AzADUser -UserPrincipalName ((Get-AzContext).Account.Id)).Id
@@ -586,11 +586,11 @@ The completed Azure SQL ARM template should look as follows:
 1. Run the following PowerShell commands to deploy the template
 
    ```PowerShell
-   New-AzResourceGroupDeployment -Name 'M04Lesson5-SQL' -ResourceGroupName '@lab.CloudResourceGroup(1851).Name' -TemplateFile '.\M04Lesson5.SQL.template.json' -TemplateParameterFile '.\M04Lesson5.SQL.parameters.json' -Mode Incremental
+   New-AzResourceGroupDeployment -Name 'M04Lesson5-SQL' -ResourceGroupName 'RG_NAME_LISTED_IN_RESOURCES' -TemplateFile '.\M04Lesson5.SQL.template.json' -TemplateParameterFile '.\M04Lesson5.SQL.parameters.json' -Mode Incremental
    ```
 
-1. Open the Azure Portal as +++@lab.CloudPortalCredential(1).Username+++ using +++@lab.CloudPortalCredential(1).Password+++ as the password.
-1. Navigate to the resource group `@lab.CloudResourceGroup(1851).Name`
+1. Open the Azure Portal as the user listed in your lab guide
+1. Navigate to the resource group listed in your lab guide
 1. Click `Deployments` under the "Settings" section and open the `M04Lesson5-SQL` deployment
 1. Open the `Inputs` section and notice how the `sqlAdminPassword` is completely blank because of the `securestring` type
 1. Open the Azure SQL instance and select the `Firewalls and virtual networks` section from the navigation pane and notice the Service Endpoint linked to the subnet
