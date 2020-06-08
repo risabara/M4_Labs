@@ -256,7 +256,7 @@ The completed VNet ARM template should look as follows:
 
 ### Deploy VNet with PowerShell
 1. Open PowerShell in `C:\Lab_Files\M04\S05`
-1. Authenticate PowerShell to Azure by running az login, and then set-azcontext -subscriptionid “xx-xx-xx-xx”
+1. Authenticate PowerShell to Azure by running Connect-AzAccount, and then Set-AzContext 'SUBSCRIPTIONID'
 1. Run the following PowerShell commands to deploy the template
 
 ```PowerShell
