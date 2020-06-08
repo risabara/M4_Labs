@@ -96,8 +96,8 @@
     ![ARM resources completed](media/ARMTemplate.ResourcesCompleted.png)
 
 ## Deploy the ARM template file
-1. Open PowerShell in `C:\Lab_Files\M04\S04`
-1. Authenticate PowerShell to Azure by running `Connect-AzAccount` ausing the credentials listed in the Resources tab of your lab guide.
+1. Either from your VSCode window, or a PowerShell window, make sure you are in the `C:\Lab_Files\M04\S04` directory
+1. If you havent already done so, authenticate to Azure by running `az login` ausing the credentials listed in the Resources tab of your lab guide. you may need to also run Set-AzContext -subscription 'YOUR_SUBSCRIPTION_ID'
 1. Run the following PowerShell commands to deploy the template
 
   **NOTE:** Because both parameters have default values, you do not need to defined a parameter file. If you would like to override these values, please create a coordinating ARM parameter file. See the lab for Module 4 Lesson 2 for details on creating this file.
@@ -119,5 +119,5 @@ New-AzResourceGroupDeployment -Name 'M04Lesson4' -ResourceGroupName 'RG_NAME_LIS
 1. There should be one storage account per region defined in the `regions` parameter array
 1. Open one of the storage accounts
 1. Inside the `Firewalls and virtual networks` blade, there should be an entry for each public IP defined in the `ipsToAllow` parameter array
-1. Inside the `Blobs` blade, there should be a container named container1
+1. Inside the `Blob service` blade, click on Containers. There should be a container named container1
 1. Review the other storage accounts deployed. Their properties should match with the exception of being deployed to a different region
