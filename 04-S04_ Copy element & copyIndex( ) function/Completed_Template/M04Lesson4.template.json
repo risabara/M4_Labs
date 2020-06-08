@@ -1,0 +1,72 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "regions": {
+            "type":"array",
+            "defaultValue": ["eastus", "westus"]
+        },
+        "ipstoallow": {
+            "type": "array",
+            "defaultValue":[
+                "13.107.21.200",
+                "204.79.197.200"
+            ]
+        }
+    },
+    "variables": {
+        "copy":[
+            {
+                "name": "storageAccounts",
+                "count": "[length(parameters('regions'))]",
+                "input": {
+                    "name": "[toLower(concat(parameters('regions')[copyIndex('storageAccounts')], uniqueString(subscription().subscriptionId)))]"
+                }
+            }
+        ]
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2018-07-01",
+            "name": "[variables('storageAccounts')[copyIndex()].name]",
+            "location": "[parameters('regions')[copyIndex()]]",
+            "kind": "StorageV2",
+            "copy":{
+                "name":"StorageLoop",
+                "count": "[length(parameters('regions'))]"
+            },
+            "sku":{
+                "name":"Standard_LRS"
+            },
+            "properties":{
+                "networkAcls":{
+                    "defaultAction":"Deny",
+                    "copy":[
+                        {
+                            "name": "ipRules",
+                            "count": "[length(parameters('ipsToAllow'))]",
+                            "input": {
+                                "value": "[parameters('ipsToAllow')[copyIndex('ipRules')]]",
+                                "action": "Allow"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+            "apiVersion": "2018-07-01",
+            "name": "[concat(variables('storageAccounts')[copyIndex()].name, '/default/container1')]",
+            "copy":{
+                "name":"ContainerLoop",
+                "count": "[length(parameters('regions'))]"
+            },
+            "dependsOn": [
+                "StorageLoop"
+            ]
+        }
+    ],
+    "outputs": {}
+}
