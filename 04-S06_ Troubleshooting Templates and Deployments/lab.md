@@ -58,11 +58,20 @@ Remember that each Azure resource is typically deployed in its own operation and
 
 ## Lab 1
 1. Deploy `Lab1.json` and when prompted, enter values of your chosing.
+      ```powershell
+      Connect-AzAccount
+      ```
+      ```powershell
+      Set-AzContext -Subscription 'YourSubscriptionID'
+      ```
+      ```powershell
+      New-AzResourceGroupDeployment -Name Lab1 -ResourceGroupName 'RG_NAME_IN_RESOURCES_TAB' -TemplateFile ".\lab1.json" -Verbose -DeploymentDebugLogLevel All
+      ```
 1. Did the deployment fail and if so, why did it fail? If the deployment succeeded, can you find ways the deployment would have failed?
 
     > [!hint] Check for template validation failure message. It will detail if the values provided were invalid and why.
 
-1. ^[Click for the answer][Lab1Answer1]
+1. [Lab1Answer1]
 
     >[Lab1Answer1]:
     >Check the parameter defnitions in the template for allowed value restrictions.
@@ -74,12 +83,15 @@ Remember that each Azure resource is typically deployed in its own operation and
 
 ## Lab 2
 1. Deploy `Lab2.json`
+      ```powershell
+      New-AzResourceGroupDeployment -Name Lab2 -ResourceGroupName 'RG_NAME_IN_RESOURCES_TAB' -TemplateFile ".\lab2.json" -Verbose -DeploymentDebugLogLevel All
+      ```
 1. Why did the deployment fail?
 
     > [!hint] The error should return the JSON path with the line and character position that failed parsing.
 
 1. Review the template file in VS Code and use the Problems panel at the bottom (or use Ctrl+Shift+M shortcut) to view issues VS Code has identified
-1. Remediate all of the JSON structure issues in the template and redeploy. ^[Click for the answer][Lab2Answer1]
+1. Remediate all of the JSON structure issues in the template and redeploy.
 
     >[Lab2Answer1]:
     >1. The `allowedValues` for the `DepartmentTag` parameter multiple issues
@@ -121,11 +133,14 @@ Remember that each Azure resource is typically deployed in its own operation and
 ## Lab 3
 1. Review `Lab3.json`. Will you be prompted for parameters?
 1. Deploy `Lab3.json`
+      ```powershell
+      New-AzResourceGroupDeployment -Name Lab3 -ResourceGroupName 'RG_NAME_IN_RESOURCES_TAB' -TemplateFile ".\lab3.json" -Verbose -DeploymentDebugLogLevel All
+      ```
 1. Why did the deployment fail?
 
     > [!hint] This time, the underlying error is not surfaced in the initial error. You will have to dig into the inner errors further down to find the cause of the first failure.
 
-1. How can the error be resolved for all future deployments? ^[Click for the answer][Lab3Answer1]
+1. How can the error be resolved for all future deployments?
 
     >[Lab3Answer1]:
     >If using the default paramter values, the deployment fails because because the storage account name starts with 'Storage' and storage accountnames     must be lower-case only. You can ensure the storage account name is always lower case using the `toLower()` function.
@@ -156,8 +171,6 @@ Remember that each Azure resource is typically deployed in its own operation and
 
     > [!hint] Because pre-deployment validation succeeded, you can use the Get-AzResourceGroupDeploymentOperation script at the beginning of the guide to gather deployment errors. Were all dependent resources deployed in time? How can resource dependency be defined?
 
-1. ^[Click for the answer][Lab3Answer2]
-
     >[Lab3Answer2]:
     >The deployment failed because the network interface attempted to provision before the subnet was created. If you attempt to redeploy the template again, it will succeed because the subnet is now created. To correct the issue so it deploys properly the first time, the network interface needs to have a dependsOn property applied:
     >
@@ -179,7 +192,10 @@ Remember that each Azure resource is typically deployed in its own operation and
 
 ## Lab 4
 1. Deploy `Lab4.json`
-1. Why did the deployment fail? ^[Click for the answer][Lab4Answer1]
+      ```powershell
+      New-AzResourceGroupDeployment -Name Lab4 -ResourceGroupName 'RG_NAME_IN_RESOURCES_TAB' -TemplateFile ".\lab4.json" -Verbose -DeploymentDebugLogLevel All
+      ```
+1. Why did the deployment fail?
 
     >[Lab4Answer1]:
     >The SQL database is missing a dependency on the SQL server
@@ -200,7 +216,7 @@ Remember that each Azure resource is typically deployed in its own operation and
     >```
 
 1. Resolve the error and attempt to redeploy `Lab4.json`
-1. Why did the deployment fail? ^[Click for the answer][Lab4Answer2]
+1. Why did the deployment fail?
 
     >[Lab4Answer2]:
     >The web server farm resource has a dependency on the web site while the web site has a dependency on the web server farm. This creates a circular dependency. The web server farm should be created first and should not have a dependency on the web site. Remove the dependsOn property from the web server farm resource definition to resolve the circular dependency.
@@ -218,7 +234,10 @@ Remember that each Azure resource is typically deployed in its own operation and
 ## Lab 5
 1. Delete the App Service and Plan to prevent a conflict with Windows and Linux App Service Plans in the same Resource Group.
 1. Deploy `Lab5.json`
-1. Why did the deployment fail? ^[Click for the answer][Lab5Answer1]
+      ```powershell
+      New-AzResourceGroupDeployment -Name Lab5 -ResourceGroupName 'RG_NAME_IN_RESOURCES_TAB' -TemplateFile ".\lab5.json" -Verbose -DeploymentDebugLogLevel All
+      ```
+1. Why did the deployment fail?
 
     >[Lab5Answer1]:
     >Template validation failed because the web site config nested resource had an invalid segment length. Because the web site config was defined as a nested resource of the parent web site, it should not have the resource type fully qualified and should only reference config.
@@ -231,7 +250,7 @@ Remember that each Azure resource is typically deployed in its own operation and
     >```
 
 1. Resolve the error and attempt to redeploy `Lab5.json`
-1. Why did the deployment fail? ^[Click for the answer][Lab5Answer2]
+1. Why did the deployment fail?
 
     >[Lab5Answer2]:
     >Template validation failed because the subnet child resource name had an invalid segment length. Because the subnet was defined as a child resource outside of the parent virtual network, the name must reference the parent resource (VNet) in addition to the child resource (subnet)
@@ -247,7 +266,10 @@ Remember that each Azure resource is typically deployed in its own operation and
 
 ## Lab 6
 1. Deploy `Lab6.json`
-1. Why did the deployment fail? ^[Click for the answer][Lab6Answer1]
+      ```powershell
+      New-AzResourceGroupDeployment -Name Lab6 -ResourceGroupName 'RG_NAME_IN_RESOURCES_TAB' -TemplateFile ".\lab6.json" -Verbose -DeploymentDebugLogLevel All
+      ```
+1. Why did the deployment fail?
 
     >[Lab6Answer1]:
     >The public IP address resource has a dependency on TailSpinPublicIPPrefix which is not a valid resource. Remove the dependsOn property.
