@@ -26,8 +26,6 @@ Template examples that are a very wide variety can be found within GitHub's quic
 
 Template strategies should consider using Nested and Linked deployments as they provide an additional layer of granularity.
 
-If you need ideas, speak with the instructor or take the time to help whiteboard what you'd want a template to do in theory.
-
 >[!ALERT]Please note that the lab environment is restricted by policy. You will be able to create only the Azure resources required by the lab. In particular, you will be able to create only the following kinds of resources:
 >
 > - Microsoft.Network
