@@ -1,22 +1,4 @@
----
-# This basic template provides core metadata fields for Markdown articles on docs.microsoft.com.
 
-# Mandatory fields.
-title: Lab - ARM Templates - Creating Templates From Scratch
-description: 115-145 characters including spaces. This abstract displays in the search result.
-author: CHDAFNI-MSFT
-ms.author: CHDAFNI # Microsoft employees only
-ms.date: 8/21/2019
-ms.topic: AzureTemplate-Lab
-# Use ms.service for services or ms.prod for on-prem products. Remove the # before the relevant field.
-# ms.service: service-name-from-white-list
-# ms.prod: product-name-from-white-list
-
-# Optional fields. Don't forget to remove # if you need a field.
-# ms.custom: can-be-multiple-comma-separated
-# ms.reviewer: MSFT-alias-of-reviewer
-# manager: MSFT-alias-of-manager-or-PM-counterpart
----
 # Lab - ARM Templates - Creating Templates From Scratch
 
 
