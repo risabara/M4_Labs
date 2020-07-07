@@ -268,6 +268,7 @@ The completed ARM template should look as follows:
 1. (+) Create a resource -> search for "Template Deployment" - Create
 1. Click "Build your own template in the editor"
 1. Copy and paste the contents of the newly created `DeploymentMethods.template.json` file
+1. Click Save
 1. Select your existing resource group
 1. Enter a value for `environment`
 1. Set the value of `projectName` to `DeploymentMethod1`
